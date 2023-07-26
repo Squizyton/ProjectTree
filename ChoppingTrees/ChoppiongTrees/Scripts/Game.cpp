@@ -2,8 +2,10 @@
 
 #include <SDL_image.h>
 #include <iostream>
-SDL_Texture* playerTex;
+#include "Base Scripts/GameObject.h"
 
+GameObject* player;
+SDL_Renderer* Game::renderer = nullptr;
 
 bool Game::Init()
 {
@@ -35,8 +37,9 @@ bool Game::Init()
 
     SDL_Surface* tmpSurface = IMG_Load("assets/paunch.png");
 
-    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-    SDL_FreeSurface(tmpSurface);
+    auto test = new Vector2(50.f,50.f);
+    
+    player = new GameObject("assets/paunch.png",test,32.f,32.f);
 
     return true;
 }
@@ -76,6 +79,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
+    player->Update();
 }
 
 
@@ -83,11 +87,10 @@ void Game::Draw()
 {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
+    
 
 
-
-
-    SDL_RenderCopy(renderer, playerTex,NULL,NULL);
+    player->Render();
 
 
     SDL_RenderPresent(renderer);
