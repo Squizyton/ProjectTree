@@ -1,12 +1,16 @@
 #include "Game.h"
 
+#include <SDL_image.h>
+#include <iostream>
+SDL_Texture* playerTex;
+
 
 bool Game::Init()
 {
-
     //If we did not intialize properly then return an error
-    if(SDL_Init(SDL_INIT_VIDEO) != 0)
+    if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
+        printf("Crash");
         return false;
     }
 
@@ -28,14 +32,19 @@ bool Game::Init()
     {
         return false;
     }
-    
+
+    SDL_Surface* tmpSurface = IMG_Load("assets/paunch.png");
+
+    playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
+    SDL_FreeSurface(tmpSurface);
+
     return true;
 }
 
 
 void Game::GameLoop()
 {
-    while(isRunning)
+    while (isRunning)
     {
         HandleEvents();
         Update();
@@ -44,14 +53,13 @@ void Game::GameLoop()
 }
 
 
-
 void Game::HandleEvents()
 {
     SDL_Event event;
 
-    while(SDL_PollEvent(&event))
+    while (SDL_PollEvent(&event))
     {
-        if(event.type == SDL_QUIT)
+        if (event.type == SDL_QUIT)
         {
             isRunning = false;
         }
@@ -68,16 +76,18 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    
 }
 
 
 void Game::Draw()
 {
+    SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
 
 
-    SDL_RenderClear(renderer);
+
+
+    SDL_RenderCopy(renderer, playerTex,NULL,NULL);
 
 
     SDL_RenderPresent(renderer);
@@ -94,7 +104,3 @@ void Game::ShutDown()
     ///It is safe to call this function even in the case of errors in initialization.
     SDL_Quit();
 }
-
-
-
-
