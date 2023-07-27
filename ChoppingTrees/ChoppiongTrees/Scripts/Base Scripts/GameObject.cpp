@@ -11,7 +11,7 @@
     */
 GameObject::GameObject(const char* textureSheet, Vector2* pos, float w, float h)
 {
-    texture = TextureManager::LoadTexture(textureSheet,Game::renderer);
+    texture = TextureManager::LoadTexture(textureSheet);
     width = w;
     height = h;
     srRrect.h = static_cast<int>(height);
@@ -33,6 +33,7 @@ void GameObject::Update()
     //DestRect is what the Renderer will target
     destRect.w = srRrect.w * 5;
     destRect.h = srRrect.h * 5;
+    
 }
 
 

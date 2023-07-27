@@ -145,6 +145,7 @@
     <ClCompile Include="Scripts\Base Scripts\GameObject.cpp" />
     <ClCompile Include="Scripts\Base Scripts\TextureManager.cpp" />
     <ClCompile Include="Scripts\Base Scripts\Tile.cpp" />
+    <ClCompile Include="Scripts\Base Scripts\TileMap.cpp" />
     <ClCompile Include="Scripts\Utilities\Utils.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -224,6 +225,7 @@
     <ClInclude Include="Scripts\Base Scripts\GameObject.h" />
     <ClInclude Include="Scripts\Base Scripts\TextureManager.h" />
     <ClInclude Include="Scripts\Base Scripts\Tile.h" />
+    <ClInclude Include="Scripts\Base Scripts\TileMap.h" />
     <ClInclude Include="Scripts\Game.h" />
     <ClInclude Include="Scripts\Utilities\Utils.h" />
   </ItemGroup>
