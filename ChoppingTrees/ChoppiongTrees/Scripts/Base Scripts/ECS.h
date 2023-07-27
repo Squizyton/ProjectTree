@@ -7,6 +7,8 @@
 #include <bitset>
 #include <array>
 
+#include "GameObject.h"
+
 //Components like Transform
 class Component;
 class Entity;
@@ -26,7 +28,7 @@ template <typename T>
 inline ComponentID GetComponentTypeID() noexcept
 {
     static ComponentID typeID = GetComponentTypeID();
-    return typeID();
+    return typeID;
 }
 
 //The max amount of components an entity can hold;
@@ -44,11 +46,11 @@ public:
     //Reference to it's owner
     Entity* entity;
 
-    virtual void Init();
-    virtual void Update();
-    virtual void Draw();
+    virtual void Init(){}
+    virtual void Update(){}
+    virtual void Draw(){}
 
-    virtual ~Component();
+    virtual ~Component(){}
 };
 
 
@@ -102,7 +104,7 @@ public:
         componentArray[GetComponentTypeID<T>()] = c;
         bitSet[GetComponentTypeID<T>()] = true;
 
-        c->init();
+        c->Init();
 
         return *c;
     }
@@ -118,17 +120,20 @@ class Manager
 {
 private:
     std::vector<std::unique_ptr<Entity>> entities_;
+    std::vector<std::unique_ptr<GameObject>> gOs_;
 
 public:
     void Update()
     {
         for(auto &e : entities_)e->Update();
+        for(auto &e : gOs_)e->Update();
         
     }
 
     void Draw()
     {
         for(auto &e : entities_)e->Draw();
+        for(auto &e : gOs_)e->Draw();
     }
 
     void Refresh()
@@ -156,12 +161,22 @@ public:
         return *e;
         
     }
+
+    GameObject& AddGameObject(const char* textureSheet, Vector2* pos, float w, float h)
+    {
+        //Create a gameObject
+        auto gO = new GameObject(textureSheet,pos, w, h);
+        
+        //Create a unique pointer for the Entity
+        std::unique_ptr<GameObject> uPtr{gO};
+
+        gOs_.emplace_back(std::move(uPtr));
+
+        return *gO;
+    }
+
+    
 };
 
 
 
-
-class ECS
-{
-public:
-};

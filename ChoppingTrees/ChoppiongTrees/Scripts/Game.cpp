@@ -4,15 +4,23 @@
 #include <iostream>
 #include "Base Scripts/GameObject.h"
 
+#include "Base Scripts/ECS.h"
+#include "Components/Components.h"
+
+
 GameObject* player;
 SDL_Renderer* Game::renderer = nullptr;
+
+Manager manager;
+
+auto& newPlayer(manager.AddEntity());
 
 bool Game::Init()
 {
     //If we did not intialize properly then return an error
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
-        printf("Crash");
+        std::cout << "Crash";
         return false;
     }
 
@@ -38,9 +46,10 @@ bool Game::Init()
     SDL_Surface* tmpSurface = IMG_Load("assets/paunch.png");
 
     auto test = new Vector2(50.f,50.f);
-    
     player = new GameObject("assets/paunch.png",test,32.f,32.f);
-
+    auto& newPlayer(manager.AddEntity());
+    newPlayer.AddComponent<PositionComponent>();
+    
     return true;
 }
 
@@ -80,6 +89,9 @@ void Game::HandleEvents()
 void Game::Update()
 {
     player->Update();
+
+    //Updates the entities;
+    manager.Update();
 }
 
 
