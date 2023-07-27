@@ -142,10 +142,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scripts\Base Scripts\ECS.cpp" />
     <ClCompile Include="Scripts\Base Scripts\GameObject.cpp" />
     <ClCompile Include="Scripts\Base Scripts\TextureManager.cpp" />
     <ClCompile Include="Scripts\Base Scripts\Tile.cpp" />
     <ClCompile Include="Scripts\Base Scripts\TileMap.cpp" />
+    <ClCompile Include="Scripts\Components\Components.cpp" />
     <ClCompile Include="Scripts\Utilities\Utils.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -222,10 +224,12 @@
     <ClCompile Include="Scripts\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scripts\Base Scripts\ECS.h" />
     <ClInclude Include="Scripts\Base Scripts\GameObject.h" />
     <ClInclude Include="Scripts\Base Scripts\TextureManager.h" />
     <ClInclude Include="Scripts\Base Scripts\Tile.h" />
     <ClInclude Include="Scripts\Base Scripts\TileMap.h" />
+    <ClInclude Include="Scripts\Components\Components.h" />
     <ClInclude Include="Scripts\Game.h" />
     <ClInclude Include="Scripts\Utilities\Utils.h" />
   </ItemGroup>
