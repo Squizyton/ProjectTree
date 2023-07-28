@@ -60,7 +60,7 @@ bool Game::Init()
     testPlayer.AddComponent<SpriteComponent>("assets/paunch.png",32,32); 
 
     TileMap* map = new TileMap();
-    map->GenerateMap(100,100);
+    map->GenerateMap(5,5);
 
     
     return true;
