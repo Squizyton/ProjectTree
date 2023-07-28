@@ -118,6 +118,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -233,6 +234,7 @@
     <ClInclude Include="Scripts\Components\Position_Component.h" />
     <ClInclude Include="Scripts\Components\SpriteComponent.h" />
     <ClInclude Include="Scripts\Game.h" />
+    <ClInclude Include="Scripts\Utilities\PerlinNoise.hpp" />
     <ClInclude Include="Scripts\Utilities\Utils.h" />
   </ItemGroup>
   <ItemGroup>

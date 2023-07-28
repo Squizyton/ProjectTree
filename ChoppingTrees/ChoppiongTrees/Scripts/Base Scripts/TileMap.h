@@ -8,14 +8,13 @@ public:
     ~TileMap();
     void LoadMap();
     void DrawMap();
-    void GenerateMap();
+    void GenerateMap(int width, int height);
     void LoadTextures();
     
 private:
     SDL_Rect src, dest;
     SDL_Texture* dirtTexture;
 
-    int map[20][25];
     
 
 };

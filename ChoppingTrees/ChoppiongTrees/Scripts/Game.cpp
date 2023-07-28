@@ -5,6 +5,7 @@
 #include "Base Scripts/GameObject.h"
 
 #include "Base Scripts/ECS.h"
+#include "Base Scripts/TileMap.h"
 #include "Components/Components.h"
 #include "Components/Position_Component.h"
 #include "Components/SpriteComponent.h"
@@ -57,6 +58,9 @@ bool Game::Init()
    
     testPlayer.AddComponent<Position_Component>(50,50);
     testPlayer.AddComponent<SpriteComponent>("assets/paunch.png",32,32); 
+
+    TileMap* map = new TileMap();
+    map->GenerateMap(100,100);
 
     
     return true;
