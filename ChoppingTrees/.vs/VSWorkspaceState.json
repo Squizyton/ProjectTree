@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ChoppiongTrees",
+    "\\x64"
   ],
-  "SelectedNode": "\\ChoppingTrees.sln",
+  "SelectedNode": "\\ChoppiongTrees\\Source.cpp",
   "PreviewInSolutionExplorer": false
 }

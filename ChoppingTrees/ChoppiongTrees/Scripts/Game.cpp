@@ -6,14 +6,16 @@
 
 #include "Base Scripts/ECS.h"
 #include "Components/Components.h"
+#include "Components/Position_Component.h"
+#include "Components/SpriteComponent.h"
 
 
-GameObject* player;
 SDL_Renderer* Game::renderer = nullptr;
 
 Manager manager;
 
 auto& newPlayer(manager.AddEntity());
+
 
 bool Game::Init()
 {
@@ -45,10 +47,17 @@ bool Game::Init()
 
     SDL_Surface* tmpSurface = IMG_Load("assets/paunch.png");
 
-    auto test = new Vector2(50.f,50.f);
-    player = new GameObject("assets/paunch.png",test,32.f,32.f);
-    auto& newPlayer(manager.AddEntity());
-    newPlayer.AddComponent<PositionComponent>();
+    auto test = new Vector2(50.f, 50.f);
+    // newPlayer.AddComponent<SpriteComponent>("assets/paunch.png",32,32);
+   //newPlayer.AddComponent<Position_Component>(100, 100);
+   //newPlayer.AddComponent<SpriteComponent>("assets/paunch.png", 32, 32);
+
+
+    auto& testPlayer = manager.AddEntity();
+   
+    testPlayer.AddComponent<Position_Component>(50,50);
+    testPlayer.AddComponent<SpriteComponent>("assets/paunch.png",32,32); 
+
     
     return true;
 }
@@ -88,10 +97,10 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-    player->Update();
-
     //Updates the entities;
+ 
     manager.Update();
+    //std::cout << newPlayer.GetComponent<Position_Component>().position->x << std::endl;
 }
 
 
@@ -99,10 +108,8 @@ void Game::Draw()
 {
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
-    
 
-
-    player->Render();
+    manager.Draw();
 
 
     SDL_RenderPresent(renderer);

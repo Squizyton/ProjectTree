@@ -230,6 +230,8 @@
     <ClInclude Include="Scripts\Base Scripts\Tile.h" />
     <ClInclude Include="Scripts\Base Scripts\TileMap.h" />
     <ClInclude Include="Scripts\Components\Components.h" />
+    <ClInclude Include="Scripts\Components\Position_Component.h" />
+    <ClInclude Include="Scripts\Components\SpriteComponent.h" />
     <ClInclude Include="Scripts\Game.h" />
     <ClInclude Include="Scripts\Utilities\Utils.h" />
   </ItemGroup>

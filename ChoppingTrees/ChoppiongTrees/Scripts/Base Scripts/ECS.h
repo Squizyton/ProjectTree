@@ -56,6 +56,9 @@ public:
 
 class Entity
 {
+protected:
+
+    
 private:
     //If not active then delete
     bool active = true;
@@ -65,22 +68,28 @@ private:
     ComponentBitSet bitSet;
 
 public:
-    void Update()
+
+    void ComponentUpdate()
     {
         for (auto& c : components) c->Update();
+    }
+
+
+    
+   virtual  void Update(){}
+    
+
+    virtual void Draw()
+    {
         for (auto& c : components) c->Draw();
     }
 
-    void Draw()
-    {
-    }
-
-    bool IsActive()
+    virtual bool IsActive()
     {
         return active;
     }
 
-    void Destroy()
+    virtual void Destroy()
     {
         active = false;
     }
@@ -91,9 +100,7 @@ public:
     {
         return bitSet[GetComponentTypeID<T>];
     }
-
-
-
+    
     template <typename T, typename... TArgs> T& AddComponent(TArgs&&... mArgs)
     {
         T* c(new T(std::forward<TArgs>(mArgs)...));
@@ -120,20 +127,22 @@ class Manager
 {
 private:
     std::vector<std::unique_ptr<Entity>> entities_;
-    std::vector<std::unique_ptr<GameObject>> gOs_;
+  
 
 public:
     void Update()
     {
-        for(auto &e : entities_)e->Update();
-        for(auto &e : gOs_)e->Update();
+        for(auto &e : entities_)
+        {
+            e->ComponentUpdate();
+            e->Update();
+        }
         
     }
 
     void Draw()
     {
         for(auto &e : entities_)e->Draw();
-        for(auto &e : gOs_)e->Draw();
     }
 
     void Refresh()
@@ -151,7 +160,7 @@ public:
     Entity& AddEntity()
     {
         //Create a new Entity
-       Entity* e = new Entity();
+        Entity* e = new Entity();
         //Create a Unique Ptr of the entity. std::unique_ptr is a smart pointer that owns and manages another object through a pointer and disposes of that object when the unique_ptr goes out of scope. 
         std::unique_ptr<Entity> uPtr{e};
         //Add it into the vector
@@ -161,21 +170,6 @@ public:
         return *e;
         
     }
-
-    GameObject& AddGameObject(const char* textureSheet, Vector2* pos, float w, float h)
-    {
-        //Create a gameObject
-        auto gO = new GameObject(textureSheet,pos, w, h);
-        
-        //Create a unique pointer for the Entity
-        std::unique_ptr<GameObject> uPtr{gO};
-
-        gOs_.emplace_back(std::move(uPtr));
-
-        return *gO;
-    }
-
-    
 };
 
 
